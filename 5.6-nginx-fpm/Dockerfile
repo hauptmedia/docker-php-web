@@ -20,5 +20,7 @@ RUN     sed -i "s/;date.timezone =.*/date.timezone = UTC/" /etc/php5/fpm/php.ini
         sed -i '/^listen.allowed_clients/c;listen.allowed_clients =' /etc/php5/fpm/pool.d/www.conf && \
         sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf
 
+# add supervisord config
+ADD	./supervisord.conf  /etc/supervisor/conf.d/supervisord.conf
 
 CMD	["/usr/bin/supervisord"]
