@@ -22,4 +22,6 @@ RUN     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 # add supervisord config
 ADD	./supervisord.conf  /etc/supervisor/conf.d/supervisord.conf
 
+ADD	etc/nginx/conf.d/upstream_phpfcgi.conf /etc/nginx/conf.d/upstream_phpfcgi.conf
+
 CMD	["/usr/bin/supervisord"]
