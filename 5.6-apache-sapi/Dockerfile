@@ -9,3 +9,6 @@ RUN     apt-get update -qq && \
         apt-get autoremove --yes && \
         rm -rf /var/lib/{apt,dpkg,cache,log}/
 
+EXPOSE	80 443
+
+CMD	["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
