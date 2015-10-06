@@ -20,7 +20,7 @@ RUN     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
         sed -i '/^;catch_workers_output/ccatch_workers_output = yes' /etc/php5/fpm/pool.d/www.conf
 
 # add supervisord config
-ADD	./supervisord.conf  /etc/supervisor/conf.d/supervisord.conf
+ADD	etc/supervisor/conf.d/ /etc/supervisor/conf.d/
 
 ADD	etc/nginx/conf.d/upstream_phpfcgi.conf /etc/nginx/conf.d/upstream_phpfcgi.conf
 
