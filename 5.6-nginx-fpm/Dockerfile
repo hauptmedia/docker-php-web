@@ -2,16 +2,18 @@ FROM	hauptmedia/php:5.6
 
 ENV     DEBIAN_FRONTEND noninteractive
 
-RUN     apt-get update -qq && \
-        apt-get install -y \
+RUN     echo "deb http://nginx.org/packages/debian/ jessie nginx" >>/etc/apt/sources.list && \
+	echo "deb-src http://nginx.org/packages/debian/ jessie nginx" >>/etc/apt/sources.list && \
+	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
+	apt-get update -qq && \
+        apt-get install -y --force-yes \
         nginx php5-fpm supervisor && \
         apt-get clean autoclean && \
         apt-get autoremove --yes && \
         rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # configure nginx
-RUN     echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
-        rm /etc/nginx/sites-enabled/*
+RUN     echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 # configure php5-fpm
 RUN     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini && \
